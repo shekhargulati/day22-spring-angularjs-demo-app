@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 
 import com.getbookmarks.domain.Story;
 import com.getbookmarks.repository.StoryRepository;
@@ -29,7 +30,8 @@ public class StoryResource {
     @RequestMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<Void> submitStory(@RequestBody Story story) {
-        storyRepository.save(story);
+        Story storyWithExtractedInformation = decorateWithInformation(story);
+        storyRepository.save(storyWithExtractedInformation);
         ResponseEntity<Void> responseEntity = new ResponseEntity<>(HttpStatus.CREATED);
         return responseEntity;
     }
@@ -44,9 +46,31 @@ public class StoryResource {
     @ResponseBody
     public Story showStory(@PathVariable("storyId") String storyId) {
         Story story = storyRepository.findOne(storyId);
-        if(story == null){
+        if (story == null) {
             throw new StoryNotFoundException(storyId);
         }
         return story;
+    }
+
+    private Story decorateWithInformation(Story story) {
+        String url = story.getUrl();
+        RestTemplate restTemplate = new RestTemplate();
+        ResponseEntity<Story> forEntity = restTemplate.getForEntity(
+                "http://gooseextractor-t20.rhcloud.com/api/v1/extract?url=" + url, Story.class);
+        if (forEntity.hasBody()) {
+            return new Story(story, forEntity.getBody());
+        }
+        return story;
+
+    }
+
+    public static void main(String[] args) {
+        StoryResource storyResource = new StoryResource(null);
+        String url = "https://www.openshift.com/blogs/day-21-docker-the-missing-tutorial";
+        String[] tags = { "docker", "container" };
+        String fullname = "Shekhar Gulati";
+        Story story = new Story(url, tags, fullname);
+
+        System.out.println(storyResource.decorateWithInformation(story));
     }
 }
