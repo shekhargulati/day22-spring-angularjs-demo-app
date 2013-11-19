@@ -29,9 +29,9 @@
 			<version>3.1.0</version>
 			<scope>provided</scope>
 		</dependency>
-		
+
 		<!-- Logging -->
-		
+
 		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
@@ -58,4 +58,19 @@
 			</build>
 		</profile>
 	</profiles>
+
+	<build>
+		<finalName>getbookmarks</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.4</version>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<outputDirectory>target</outputDirectory>
+					<warName>ROOT</warName>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
 </project>

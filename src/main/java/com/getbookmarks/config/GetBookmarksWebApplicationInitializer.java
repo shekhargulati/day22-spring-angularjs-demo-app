@@ -6,17 +6,17 @@ public class GetBookmarksWebApplicationInitializer extends AbstractAnnotationCon
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class[] { ApplicationConfig.class };
+        return null;
     }
 
     @Override
     protected Class<?>[] getServletConfigClasses() {
-        return new Class[] { WebMvcConfig.class };
+        return new Class<?>[] { WebMvcConfig.class };
     }
 
     @Override
     protected String[] getServletMappings() {
-        return new String[] { "/api/v1" };
+        return new String[] { "/" };
     }
 
 }
