@@ -64,13 +64,4 @@ public class StoryResource {
 
     }
 
-    public static void main(String[] args) {
-        StoryResource storyResource = new StoryResource(null);
-        String url = "https://www.openshift.com/blogs/day-21-docker-the-missing-tutorial";
-        String[] tags = { "docker", "container" };
-        String fullname = "Shekhar Gulati";
-        Story story = new Story(url, tags, fullname);
-
-        System.out.println(storyResource.decorateWithInformation(story));
-    }
 }

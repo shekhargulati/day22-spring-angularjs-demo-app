@@ -1,6 +1,5 @@
 package com.getbookmarks.domain;
 
-import java.util.Arrays;
 import java.util.Date;
 
 import org.springframework.data.annotation.Id;
@@ -18,8 +17,6 @@ public class Story {
 
     private String url;
 
-    private String[] tags;
-
     private String fullname;
 
     private final Date submittedOn = new Date();
@@ -29,16 +26,14 @@ public class Story {
     public Story() {
     }
 
-    public Story(String url, String[] tags, String fullname) {
+    public Story(String url, String fullname) {
         this.url = url;
-        this.tags = tags;
         this.fullname = fullname;
     }
 
     public Story(Story input, Story extraInformation) {
         this.url = input.getUrl();
         this.fullname = input.getFullname();
-        this.tags = input.getTags();
         this.title = extraInformation.getTitle();
         this.text = extraInformation.getText();
         this.image = extraInformation.getImage();
@@ -60,9 +55,6 @@ public class Story {
         return url;
     }
 
-    public String[] getTags() {
-        return tags;
-    }
 
     public String getFullname() {
         return fullname;
@@ -74,13 +66,6 @@ public class Story {
 
     public String getImage() {
         return image;
-    }
-
-    @Override
-    public String toString() {
-        return "Story [id=" + id + ", title=" + title + ", text=" + text + ", url=" + url + ", tags="
-                + Arrays.toString(tags) + ", fullname=" + fullname + ", submittedOn=" + submittedOn + ", image="
-                + image + "]";
     }
 
 }
