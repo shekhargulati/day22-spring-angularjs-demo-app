@@ -1,4 +1,4 @@
-angular.module("sprang.services", ["ngResource"]).
+angular.module("getbookmarks.services", ["ngResource"]).
     factory('Story', function ($resource) {
         var Story = $resource('/api/v1/stories/:storyId', {storyId: '@id'});
         Story.prototype.isNew = function(){
@@ -7,7 +7,7 @@ angular.module("sprang.services", ["ngResource"]).
         return Story;
     });
 
-angular.module("sprang", ["sprang.services"]).
+angular.module("getbookmarks", ["getbookmarks.services"]).
     config(function ($routeProvider) {
         $routeProvider
             .when('/', {templateUrl: 'views/stories/list.html', controller: StoryListController})
@@ -26,7 +26,7 @@ function StoryCreateController($scope, $routeParams, $location, Story) {
 
     $scope.save = function () {
     	$scope.story.$save(function (story, headers) {
-    		toastr.success("Created");
+    		toastr.success("Submitted New Story");
             $location.path('/');
         });
     };
