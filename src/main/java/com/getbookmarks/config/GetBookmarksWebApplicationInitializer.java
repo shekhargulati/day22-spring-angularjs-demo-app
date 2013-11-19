@@ -13,7 +13,7 @@ public class GetBookmarksWebApplicationInitializer implements WebApplicationInit
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
         AnnotationConfigWebApplicationContext webApplicationContext = new AnnotationConfigWebApplicationContext();
-        webApplicationContext.register(WebMvcConfig.class);
+        webApplicationContext.register(ApplicationConfig.class, WebMvcConfig.class);
 
         Dynamic dynamc = servletContext.addServlet("dispatcherServlet", new DispatcherServlet(webApplicationContext));
         dynamc.addMapping("/api/v1/*");
