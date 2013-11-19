@@ -10,7 +10,7 @@ angular.module("sprang.services", ["ngResource"]).
 angular.module("sprang", ["sprang.services"]).
     config(function ($routeProvider) {
         $routeProvider
-            .when('/stories', {templateUrl: 'views/stories/list.html', controller: StoryListController})
+            .when('/', {templateUrl: 'views/stories/list.html', controller: StoryListController})
             .when('/stories/new', {templateUrl: 'views/stories/create.html', controller: StoryCreateController})
             .when('/stories/:storyId', {templateUrl: 'views/stories/detail.html', controller: StoryDetailController});
     });
