@@ -27,9 +27,7 @@ function StoryCreateController($scope, $routeParams, $location, Story) {
     $scope.save = function () {
     	$scope.story.$save(function (story, headers) {
     		toastr.success("Created");
-    		var location = headers('Location');
-    		var id = location.substring(location.lastIndexOf('/') + 1);
-            $location.path('/stories/' + id);
+            $location.path('/stories');
         });
     };
 }
