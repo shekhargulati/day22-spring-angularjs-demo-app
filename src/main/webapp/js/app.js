@@ -11,6 +11,7 @@ angular.module("sprang", ["sprang.services"]).
     config(function ($routeProvider) {
         $routeProvider
             .when('/stories', {templateUrl: 'views/stories/list.html', controller: StoryListController})
+            .when('/stories/new', {templateUrl: 'views/stories/create.html', controller: StoryCreateController})
             .when('/stories/:storyId', {templateUrl: 'views/stories/detail.html', controller: StoryDetailController});
     });
 
@@ -19,27 +20,24 @@ function StoryListController($scope, Story) {
     
 }
 
-function StoryDetailController($scope, $routeParams, $location, Story) {
-    var storyId = $routeParams.storyId;
+function StoryCreateController($scope, $routeParams, $location, Story) {
 
-    if (storyId === 'new') {
-        $scope.story = new Story();
-    } else {
-        $scope.story = Story.get({storyId: storyId});
-    }
+    $scope.story = new Story();
 
     $scope.save = function () {
-        if ($scope.story.isNew()) {
-            $scope.story.$save(function (story, headers) {
-                toastr.success("Created");
-                var location = headers('Location');
-                var id = location.substring(location.lastIndexOf('/') + 1);
-                $location.path('/stories/' + id);
-            });
-        } else {
-            $scope.story.$update(function() {
-                toastr.success("Updated");
-            });
-        }
+    	$scope.story.$save(function (story, headers) {
+    		toastr.success("Created");
+    		var location = headers('Location');
+    		var id = location.substring(location.lastIndexOf('/') + 1);
+            $location.path('/stories/' + id);
+        });
     };
+}
+
+
+function StoryDetailController($scope, $routeParams, $location, Story) {
+    var storyId = $routeParams.storyId;
+    
+    $scope.story = Story.get({storyId: storyId});
+
 }
