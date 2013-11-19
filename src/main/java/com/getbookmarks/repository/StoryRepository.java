@@ -10,5 +10,5 @@ import com.getbookmarks.domain.Story;
 @Repository
 public interface StoryRepository extends CrudRepository<Story, String> {
 
-    public List<Story> findAllOrderBySubmittedOnDesc();
+    public List<Story> findOrderBySubmittedOnDesc();
 }
