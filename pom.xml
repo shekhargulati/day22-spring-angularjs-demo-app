@@ -12,10 +12,20 @@
 		<maven.compiler.target>1.7</maven.compiler.target>
 	</properties>
 	<dependencies>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>3.2.5.RELEASE</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
 	</dependencies>
 	<profiles>
 		<profile>
-			
+
 			<id>openshift</id>
 			<build>
 				<finalName>getbookmarks</finalName>
