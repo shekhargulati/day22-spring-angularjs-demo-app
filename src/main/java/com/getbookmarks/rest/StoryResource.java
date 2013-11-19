@@ -39,7 +39,7 @@ public class StoryResource {
     @RequestMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public List<Story> allStories() {
-        return storyRepository.findOrderBySubmittedOnDesc();
+        return storyRepository.findAllOrderBySubmittedonDesc();
     }
 
     @RequestMapping(value = "/{storyId}", produces = MediaType.APPLICATION_JSON_VALUE)
